@@ -10,24 +10,25 @@ accountSid = os.getenv('ACCOUNT_SID')
 authToken = os.getenv('AUTH_TOKEN')
 client = Client(accountSid, authToken)
 
-# message = client.messages.create(
-#     to = os.getenv('PHONE_NUMBER'),
-#     from_ = "+16814994863",
-#     body = "Your Flight is On Time."
-# )
-# print(message)
+def pushNotification(to_number, to_email, body):
+    # Sending SMS to Phone Number
+    message = client.messages.create(
+    to = to_number, # You can Try
+    from_ = os.getenv('FROM_PHONE_NUMBER'),
+    body = body
+    )
+    # Sending email
+    msg = EmailMessage()
+    msg.set_content(body)
+    msg['subject'] = "Flight Status"
+    msg['to'] = to_email
 
-msg = EmailMessage()
-msg.set_content("Your Flight is On Time.")
-msg['subject'] = "Flight Status"
-msg['to'] = "nitinkumar150103@gmail.com" 
+    user = "multipurposemail15@gmail.com"
+    msg['from'] = user
+    pwd = "pwww aile ckng ruji"
 
-user = "multipurposemail15@gmail.com"
-msg['from'] = user
-pwd = "pwww aile ckng ruji"
-
-server = smtplib.SMTP("smtp.gmail.com", 587)
-server.starttls()
-server.login(user, password=pwd)
-server.send_message(msg)
-server.quit()
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login(user, password=pwd)
+    server.send_message(msg)
+    server.quit()

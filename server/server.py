@@ -1,6 +1,6 @@
 from bson import ObjectId
 from flask import Flask, jsonify  # type: ignore
-from flask_cors import CORS
+from flask_cors import CORS  # type: ignore
 from Notification import pushNotification
 from pymongo import MongoClient
 
